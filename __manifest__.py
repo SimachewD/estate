@@ -8,11 +8,16 @@
         - Record details such as price, bedrooms, garden, garage, etc.
         - Plan availability and sales
         """,
-    'author': 'Odoo-16-training',
+    'author': 'odoo-16-training',
     'category': 'Real Estate',
     'depends': ['base'],
-    'data': [],
-    'demo': [],
+    'data': [
+        'security/res_group.xml',
+        'security/ir.model.access.csv',
+    ],
+    'demo': [
+        'data/demo.xml',
+    ],
     'installable': True,
     'application': True,
     'auto_install': False,

@@ -1,0 +1,17 @@
+<odoo>
+    <record id="estate_property_demo_1" model="estate.property">
+        <field name="name">Green Villa</field>
+        <field name="description">A beautiful villa located in the suburbs with a spacious garden.</field>
+        <field name="postcode">12345</field>
+        <field name="date_availability">2025-12-01</field>
+        <field name="expected_price">250000</field>
+        <field name="selling_price">0</field>
+        <field name="bedrooms">3</field>
+        <field name="living_area">150</field>
+        <field name="facades">2</field>
+        <field name="garage">True</field>
+        <field name="garden">True</field>
+        <field name="garden_area">80</field>
+        <field name="garden_orientation">south</field>
+    </record>
+</odoo>

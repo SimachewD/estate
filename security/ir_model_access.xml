@@ -1,0 +1,23 @@
+<odoo>
+    <!-- Read-only access for internal users -->
+    <record id="access_estate_property_user" model="ir.model.access">
+        <field name="name">estate.property.user</field>
+        <field name="model_id" ref="model_estate_property"/>
+        <field name="group_id" ref="base.group_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- Full access for Estate Manager group -->
+    <record id="access_estate_property_admin" model="ir.model.access">
+        <field name="name">estate.property.admin</field>
+        <field name="model_id" ref="model_estate_property"/>
+        <field name="group_id" ref="estate.estate_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+</odoo>
