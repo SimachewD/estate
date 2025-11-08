@@ -1,0 +1,84 @@
+# ───────────────────────────────
+# Python
+# ───────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.env
+.venv
+venv/
+ENV/
+env/
+Pipfile
+Pipfile.lock
+
+# Byte-compiled / optimized / DLL files
+*.so
+*.dll
+*.dylib
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ───────────────────────────────
+# Odoo specific
+# ───────────────────────────────
+*.log
+*.swp
+*.tmp
+*.bak
+*.db
+*.zip
+
+# Odoo generated files
+/.local/
+addons_path.txt
+*.po~
+*.pot~
+/__openerp__.py     # legacy manifests
+
+# Ignore compiled assets if any
+/static/.web.assets_cache/
+*.min.js
+*.min.css
+
+# ───────────────────────────────
+# IDE & Editor junk
+# ───────────────────────────────
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+
+# ───────────────────────────────
+# OS files
+# ───────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ───────────────────────────────
+# Testing / temp
+# ───────────────────────────────
+.coverage
+.tox/
+.nox/
+.cache/
+pytest_cache/
+.mypy_cache/
