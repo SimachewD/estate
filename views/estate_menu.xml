@@ -1,0 +1,25 @@
+<odoo>
+    <!-- Top-level menu -->
+    <menuitem 
+        id="menu_estate_root"
+        name="Real Estate"
+        sequence="10"
+    />
+
+    <!-- Submenu for Properties -->
+    <menuitem 
+        id="menu_estate_property"
+        name="Properties"
+        parent="menu_estate_root"
+        sequence="10"
+    />
+
+    <!-- Menu item that triggers the action -->
+    <menuitem 
+        id="menu_estate_property_action"
+        name="Properties"
+        parent="menu_estate_property"
+        action="action_estate_property"
+        sequence="10"
+    />
+</odoo>

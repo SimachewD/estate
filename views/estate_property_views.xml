@@ -1,0 +1,106 @@
+<odoo>
+    <!-- Tree view -->
+    <record id="view_estate_property_tree" model="ir.ui.view">
+        <field name="name">estate.property.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="expected_price"/>
+                <field name="selling_price"/>
+                <field name="bedrooms"/>
+                <field name="living_area"/>
+                <field name="garage"/>
+                <field name="garden"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view with notebook -->
+    <record id="view_estate_property_form" model="ir.ui.view">
+        <field name="name">estate.property.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form string="Property">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="expected_price"/>
+                            <field name="selling_price"/>
+                            <field name="state"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="date_availability"/>
+                            <field name="postcode_id"/>
+                            <field name="bedrooms"/>
+                            <field name="living_area"/>
+                            <field name="facades"/>
+                        </group>
+                    </group>
+
+                    <!-- Notebook Tabs -->
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+
+                        <page string="Garden &amp; Garage">
+                            <group>
+                                <field name="garage"/>
+                                <field name="garden"/>
+                                <field name="garden_area" attrs="{'invisible': [('garden','=',False)]}"/>
+                                <field name="garden_orientation" attrs="{'invisible': [('garden','=',False)]}"/>
+                            </group>
+                        </page>
+
+                        <page string="Additional Info">
+                            <group>
+                                <field name="create_date" readonly="1"/>
+                                <field name="write_date" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search, filters and groups -->
+    <record id="view_estate_property_search" model="ir.ui.view">
+        <field name="name">estate.property.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Search Properties">
+                <!-- Searchable fields -->
+                <field name="name" string="Title"/>
+                <field name="postcode_id"/>
+                <field name="expected_price"/>
+                <field name="bedrooms"/>
+                <field name="living_area"/>
+                <field name="facades"/>
+
+                <!-- Filters -->
+                <filter name="garden" string="With Garden" domain="[('garden','=',True)]"/>
+                <filter name="garage" string="With Garage" domain="[('garage','=',True)]"/>
+                <filter name="state" string="Available" domain="[('state','in',['new','offer_received'])]"/>
+                <filter name="inactive" string="Inactive" domain="[('active','=',False)]"/>
+
+                <!-- Group By Section -->
+                <group expand="0" string="Group By">
+                    <filter name="postcode" string="Postcode" context="{'group_by': 'postcode_id'}"/>
+                    <filter name="state" string="State" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+  
+    <!-- Action -->
+    <record id="action_estate_property" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

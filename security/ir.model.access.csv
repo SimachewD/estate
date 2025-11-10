@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_estate_property_user,estate.property.user,model_estate_property,base.group_user,1,0,0,0
 access_estate_property_admin,estate.property.admin,model_estate_property,estate.estate_admin,1,1,1,1
+access_estate_postcode_user,estate.postcode.user,model_estate_postcode,base.group_user,1,0,0,0
+access_estate_postcode_admin,estate.postcode.admin,model_estate_postcode,estate.estate_admin,1,1,1,1
