@@ -13,6 +13,13 @@
         parent="menu_estate_root"
         sequence="10"
     />
+    <!-- Settings - Submenu for Properties -->
+    <menuitem 
+        id="menu_estate_settings"
+        name="Settings"
+        parent="menu_estate_root"
+        sequence="10"
+    />
 
     <!-- Menu item that triggers the action -->
     <menuitem 
@@ -22,4 +29,18 @@
         action="action_estate_property"
         sequence="10"
     />
+
+    <!-- Menu Items -->
+    <menuitem id="menu_estate_property_type"
+        name="Property Types"
+        parent="menu_estate_settings"
+        action="action_estate_property_type"
+        sequence="30"/>
+
+    <!-- Menu under Settings -->
+    <menuitem id="menu_estate_property_tag"
+        name="Property Tags"
+        parent="menu_estate_settings"
+        action="action_estate_property_tag"
+        sequence="40"/>
 </odoo>
