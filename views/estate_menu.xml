@@ -18,6 +18,14 @@
         id="menu_estate_settings"
         name="Settings"
         parent="menu_estate_root"
+        sequence="20"
+    />
+
+    <!-- menu Advertisement -->
+    <menuitem 
+        id="menu_estate_advertisement"
+        name="Advertisement"
+        parent="menu_estate_root"
         sequence="10"
     />
 
@@ -43,4 +51,10 @@
         parent="menu_estate_settings"
         action="action_estate_property_tag"
         sequence="40"/>
+
+    <!-- Menu under Advertisement -->
+    <menuitem id="menu_estate_offer"
+              name="Offers"
+              parent="estate.menu_estate_advertisement"
+              action="action_estate_property_offer"/>
 </odoo>
