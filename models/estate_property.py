@@ -117,3 +117,24 @@ class EstateProperty(models.Model):
                 record.best_price = max(record.offer_ids.mapped('price'))
             else:
                 record.best_price = 0.0
+
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        """Auto-set defaults when garden is true, clear when false."""
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = "north"
+        else:
+            self.garden_area = False
+            self.garden_orientation = False
+
+    @api.onchange("date_availability")
+    def _onchange_date_availability(self):
+        """Soft warning if availability date is before today"""
+        if self.date_availability and self.date_availability < fields.Date.today():
+            return {
+                "warning": {
+                    "title": "Invalid Availability Date",
+                    "message": "The availability date cannot be earlier than today.",
+                }
+            }
