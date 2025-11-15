@@ -12,11 +12,13 @@
                 <field name="validity"/>
                 <field name="date_deadline"/>
                 <button name="action_accept"
+                        string="Accept"
                         type="object"
                         icon="fa-check"
                         attrs="{'invisible': [('status', '=', 'accepted')]}"/>
 
                 <button name="action_refuse"
+                        string="Refuse"
                         type="object"
                         icon="fa-times"
                         attrs="{'invisible': [('status', '=', 'refused')]}"/>

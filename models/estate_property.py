@@ -5,6 +5,7 @@ from odoo.exceptions import UserError , ValidationError
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
+    _order = "id desc"
 
     # Basic property info
     name = fields.Char(string="Title", required=True)
@@ -33,6 +34,13 @@ class EstateProperty(models.Model):
         string="Selling Price",
         readonly=True,
         copy=False
+    )
+
+    # Currency
+    currency_id = fields.Many2one(
+        'res.currency', 
+        string='Currency', 
+        default=lambda self: self.env.company.currency_id
     )
 
     # Property details
