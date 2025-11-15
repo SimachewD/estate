@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from datetime import timedelta
+from odoo.exceptions import UserError , ValidationError
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -138,3 +139,37 @@ class EstateProperty(models.Model):
                     "message": "The availability date cannot be earlier than today.",
                 }
             }
+
+     # --- BUTTON ACTIONS ---
+    def action_sold(self):
+        for record in self:
+            if record.state == 'canceled':
+                raise UserError("Canceled properties cannot be sold.")
+            if record.state == 'sold':
+                raise UserError("This property is already sold.")
+            record.state = 'sold'
+        return True
+
+    def action_cancel(self):
+        for record in self:
+            if record.state == 'sold':
+                raise UserError("Sold properties cannot be canceled.")
+            record.state = 'canceled'
+        return True
+    
+    # --- SQL Constraints ---
+    _sql_constraints = [
+        ('expected_price_positive', 'CHECK(expected_price > 0)', 'Expected price must be strictly positive!'),
+        ('selling_price_positive', 'CHECK(selling_price >= 0)', 'Selling price must be positive!'),
+    ]
+
+     # --- Python Constraint ---
+    @api.constrains('expected_price', 'selling_price')
+    def _check_selling_price(self):
+        for record in self:
+            if record.selling_price and record.expected_price:
+                min_allowed = record.expected_price * 0.9
+                if record.selling_price < min_allowed:
+                    raise ValidationError(
+                        f"Selling price ({record.selling_price}) cannot be lower than 90% of the expected price ({record.expected_price})."
+                    )
