@@ -23,6 +23,11 @@
     'demo': [
         'data/demo.xml',
     ],
+    # 'assets': {
+    #     'web.assets_backend': [
+    #         'estate/static/src/css/custom.css',
+    #     ],
+    # },
     'installable': True,
     'application': True,
     'auto_install': False,
