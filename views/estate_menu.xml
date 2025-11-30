@@ -38,6 +38,13 @@
         action="action_estate_property"
         sequence="10"
     />
+    <menuitem 
+        id="estate_property_accounting_menu"
+        name="Accounting"
+        parent="menu_estate_property"
+        action="estate_property_accounting_action"
+        sequence="20"
+    />
 
     <!-- Menu Items -->
     <menuitem id="menu_estate_property_type"

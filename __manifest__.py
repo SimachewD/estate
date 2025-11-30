@@ -10,7 +10,7 @@
         """,
     'author': 'odoo-16-training',
     'category': 'Real Estate',
-    'depends': ['base'],
+    'depends': ['base', 'mail', 'contacts'],
     'data': [
         'security/res_group.xml',
         'security/ir.model.access.csv',
@@ -18,6 +18,7 @@
         'views/estate_property_type_views.xml',
         'views/estate_property_offer_views.xml',
         'views/estate_property_tag_views.xml',
+        'views/estate_property_accounting_views.xml',
         'views/estate_menu.xml',
     ],
     'demo': [

@@ -1,0 +1,46 @@
+
+<odoo>
+    <!-- Form View for Property Accounting -->
+    <record id="view_estate_property_accounting_form" model="ir.ui.view">
+        <field name="name">estate.property.accounting.form</field>
+        <field name="model">estate.property.accounting</field>
+        <field name="arch" type="xml">
+            <form string="Property Accounting">
+                <sheet>
+                    <group>
+                        <!-- Delegated fields from estate.property -->
+                        <field name="name"/>
+                        <field name="expected_price"/>
+                        <field name="description"/>
+                    </group>
+
+                    <group string="Accounting Info">
+                        <field name="accounting_code"/>
+                        <field name="tax_rate"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_estate_property_accounting_tree" model="ir.ui.view">
+        <field name="name">estate.property.accounting.tree</field>
+        <field name="model">estate.property.accounting</field>
+        <field name="arch" type="xml">
+            <tree string="Property Accounting">
+                <field name="name"/>
+                <field name="expected_price"/>
+                <field name="accounting_code"/>
+                <field name="tax_rate"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="estate_property_accounting_action" model="ir.actions.act_window">
+        <field name="name">Property Accounting</field>
+        <field name="res_model">estate.property.accounting</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

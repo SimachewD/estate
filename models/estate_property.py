@@ -5,6 +5,7 @@ from odoo.exceptions import UserError , ValidationError
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = "id desc"
 
     # Basic property info
@@ -29,11 +30,12 @@ class EstateProperty(models.Model):
     )
     
     # Pricing
-    expected_price = fields.Float(string="Expected Price", required=True)
+    expected_price = fields.Float(string="Expected Price", required=True, tracking=True)
     selling_price = fields.Float(
         string="Selling Price",
         readonly=True,
-        copy=False
+        copy=False,
+        tracking=True
     )
 
     # Currency
@@ -87,7 +89,8 @@ class EstateProperty(models.Model):
         string="Status",
         required=True,
         copy=False,
-        default="new"
+        default="new",
+        tracking=True
     )
 
     # Relationships
@@ -107,7 +110,7 @@ class EstateProperty(models.Model):
         'estate.property.offer',
         'property_id',
         string="Offers"
-    )
+    )   
 
     tag_ids = fields.Many2many(
         'estate.property.tag',
@@ -148,6 +151,18 @@ class EstateProperty(models.Model):
                 }
             }
 
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_allowed(self):
+        """
+        Prevent deletion unless state is 'new' or 'canceled'.
+        Remember: self may contain multiple records.
+        """
+        for record in self:
+            if record.state not in ['new', 'canceled']:
+                raise UserError(
+                    "You can only delete properties that are New or Canceled."
+                )
+    
      # --- BUTTON ACTIONS ---
     def action_sold(self):
         for record in self:
@@ -164,7 +179,7 @@ class EstateProperty(models.Model):
                 raise UserError("Sold properties cannot be canceled.")
             record.state = 'canceled'
         return True
-    
+
     # --- SQL Constraints ---
     _sql_constraints = [
         ('expected_price_positive', 'CHECK(expected_price > 0)', 'Expected price must be strictly positive!'),
