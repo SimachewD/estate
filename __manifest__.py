@@ -14,6 +14,7 @@
     'data': [
         'security/res_group.xml',
         'security/ir.model.access.csv',
+        'data/sequence.xml',
         'views/estate_property_views.xml',
         'views/estate_property_type_views.xml',
         'views/estate_property_offer_views.xml',
@@ -25,11 +26,11 @@
     'demo': [
         'data/demo.xml',
     ],
-    # 'assets': {
-    #     'web.assets_backend': [
-    #         'estate/static/src/css/custom.css',
-    #     ],
-    # },
+    'assets': {
+        'web.assets_backend': [
+            'estate/static/src/css/custom.css',
+        ],
+    },
     'installable': True,
     'application': True,
     'auto_install': False,

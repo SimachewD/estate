@@ -7,6 +7,7 @@ class EstateProperty(models.Model):
     _description = "Real Estate Property"
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = "id desc"
+    _rec_name = 'sequence' 
 
     # Basic property info
     name = fields.Char(string="Title", required=True)
@@ -116,6 +117,21 @@ class EstateProperty(models.Model):
         'estate.property.tag',
         string="Tags"
     )
+
+    sequence = fields.Char(
+        string="Reference",
+        readonly=True,
+        copy=False,
+        default="New"
+    )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('sequence', "New") == "New":
+                vals['sequence'] = self.env['ir.sequence'].next_by_code("estate.property") or "New"
+        return super().create(vals_list)
+
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):

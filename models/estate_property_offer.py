@@ -6,6 +6,7 @@ class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Property Offer"
     _order = "price desc"
+    _rec_name = 'sequence' 
 
     price = fields.Float(string="Offer Price")
 
@@ -46,6 +47,12 @@ class EstatePropertyOffer(models.Model):
         inverse="_inverse_date_deadline",
         store=True,
     )
+    sequence = fields.Char(
+        string="Reference",
+        readonly=True,
+        copy=False,
+        default="New"
+    )
 
     # ✅ Compute function
     @api.depends("create_date", "validity")
@@ -85,29 +92,34 @@ class EstatePropertyOffer(models.Model):
             offer.status = "refused"
         return True
     
-    @api.model
-    def create(self, vals):
-        # 1) get the property ID (integer)
-        property_id = vals.get('property_id')
-        property_record = self.env['estate.property'].browse(property_id)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            # 1) get the property record
+            property_id = vals.get('property_id')
+            property_record = self.env['estate.property'].browse(property_id)
 
-        # Safety: ensure record exists
-        if not property_record:
-            raise UserError("Invalid Property")
+            # Safety: ensure record exists
+            if not property_record.exists():
+                raise UserError("Invalid Property")
 
-        # 2) Check if price is lower than an existing offer
-        existing_prices = property_record.offer_ids.mapped('price')
-        if existing_prices and vals.get('price') < max(existing_prices):
-            raise UserError(
-                "You cannot create an offer lower than an existing offer."
-            )
+            # 2) Check if price is lower than an existing offer
+            existing_prices = property_record.offer_ids.mapped('price')
+            if existing_prices and vals.get('price', 0) < max(existing_prices):
+                raise UserError(
+                    "You cannot create an offer lower than an existing offer."
+                )
 
-        # 3) Set property state to offer_received (only if state is 'new')
-        if property_record.state == 'new':
-            property_record.state = 'offer_received'
+            # 3) Set property state to offer_received (only if state is 'new')
+            if property_record.state == 'new':
+                property_record.state = 'offer_received'
+            
+            # 4) create sequence number for each record
+            if vals.get('sequence', "New") == "New":
+                vals['sequence'] = self.env['ir.sequence'].next_by_code("estate.property.offer") or "New"
 
-        # 4) Normal create call
-        return super().create(vals)
+        # 5) Call super() once for all values
+        return super().create(vals_list)
     
     # sql constraints to ensure price is positive
     _sql_constraints = [

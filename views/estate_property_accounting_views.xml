@@ -15,6 +15,7 @@
                     </group>
 
                     <group string="Accounting Info">
+                        <field name="accounting_sequence" readonly="1"/>
                         <field name="accounting_code"/>
                         <field name="tax_rate"/>
                     </group>
@@ -29,6 +30,7 @@
         <field name="model">estate.property.accounting</field>
         <field name="arch" type="xml">
             <tree string="Property Accounting">
+                <field name="accounting_sequence"/>
                 <field name="name"/>
                 <field name="expected_price"/>
                 <field name="accounting_code"/>

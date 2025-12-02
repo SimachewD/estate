@@ -4,8 +4,8 @@
         id="menu_estate_root"
         name="Real Estate"
         sequence="10"
+        web_icon="estate,static/description/icon.png"
     />
-        <!-- web_icon="estate,static/description/icon.png" -->
 
     <!-- Submenu for Properties -->
     <menuitem 

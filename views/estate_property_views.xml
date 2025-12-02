@@ -5,8 +5,9 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <tree decoration-success="state in ['offer_received','offer_accepted']" decoration-bf="state == 'offer_accepted'" decoration-muted="state == 'sold'">
+                <field name="sequence" />
                 <field name="name"/>
-                <field name="tag_ids" widget="many2many_tags"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 <field name="property_type_id"/>
                 <field name="currency_id" invisible="1"/>
                 <field name="expected_price" widget="monetary" options="{'currency_field': 'currency_id', 'display_currency_symbol': True}"/>
@@ -37,6 +38,7 @@
                 <sheet>
                     <group>
                         <group>
+                            <field name="sequence" readonly ="1"/>
                             <field name="name"/>
                             <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                             <field name="property_type_id" options="{'no_create': True, 'no_open': True}"/>
@@ -77,12 +79,13 @@
                         <page string="Offers">
                             <field name="offer_ids" attrs="{'readonly': [('state', 'in', ['offer_accepted', 'sold', 'canceled'])]}">
                                 <tree editable="bottom" string="Offers">
-                                    <field name="price"/>
+                                    <field name="sequence" readonly="1"/>
                                     <field name="partner_id"/>
+                                    <field name="price"/>
                                     <field name="validity"/>
                                     <field name="date_deadline"/>
-                                    <button name="action_accept" string="Accept" type="object" icon="fa-check" attrs="{'invisible': [('status', 'in', ['accepted','refused'])]}"/>
-                                    <button name="action_refuse" string="Refuse" type="object" icon="fa-times" attrs="{'invisible': [('status', 'in', ['accepted','refused'])]}"/>
+                                    <button name="action_accept" string="Accept" type="object" icon="fa-check" class="acccept_green" attrs="{'invisible': [('status', 'in', ['accepted','refused'])]}"/>
+                                    <button name="action_refuse" string="Refuse" type="object" icon="fa-times" class="refuse_red" attrs="{'invisible': [('status', 'in', ['accepted','refused'])]}"/>
                                     <field name="status"/>
                                 </tree>
                             </field>

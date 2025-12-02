@@ -1,0 +1,23 @@
+<odoo>
+    <record id="seq_estate_property" model="ir.sequence">
+        <field name="name">Estate Property Sequence</field>
+        <field name="code">estate.property</field>
+        <field name="prefix">PROP/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="seq_estate_property_offer" model="ir.sequence">
+        <field name="name">Estate Property Offer Sequence</field>
+        <field name="code">estate.property.offer</field>
+        <field name="prefix">OFF/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="seq_estate_property_accounting" model="ir.sequence">
+        <field name="name">Estate Property Accounting Sequence</field>
+        <field name="code">estate.property.accounting</field>
+        <field name="prefix">ACC/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo> 
