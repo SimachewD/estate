@@ -1,0 +1,11 @@
+/* Refuse button icon + text red, keep default button background */
+.refuse_red,
+.refuse_red i {
+    color: red !important;
+}
+
+/* Accept button icon + text green, keep default button background */
+.acccept_green,
+.acccept_green i {
+    color: green !important;
+}   

@@ -1,0 +1,68 @@
+<odoo>
+    <!-- Top-level menu -->
+    <menuitem 
+        id="menu_estate_root"
+        name="Real Estate"
+        sequence="10"
+        web_icon="estate,static/description/icon.png"
+    />
+
+    <!-- Submenu for Properties -->
+    <menuitem 
+        id="menu_estate_property"
+        name="Properties"
+        parent="menu_estate_root"
+        sequence="10"
+    />
+    <!-- Settings - Submenu for Properties -->
+    <menuitem 
+        id="menu_estate_settings"
+        name="Settings"
+        parent="menu_estate_root"
+        sequence="20"
+    />
+
+    <!-- menu Advertisement -->
+    <menuitem 
+        id="menu_estate_advertisement"
+        name="Advertisement"
+        parent="menu_estate_root"
+        sequence="10"
+    />
+
+    <!-- Menu item that triggers the action -->
+    <menuitem 
+        id="menu_estate_property_action"
+        name="Properties"
+        parent="menu_estate_property"
+        action="action_estate_property"
+        sequence="10"
+    />
+    <menuitem 
+        id="estate_property_accounting_menu"
+        name="Accounting"
+        parent="menu_estate_property"
+        action="estate_property_accounting_action"
+        sequence="20"
+    />
+
+    <!-- Menu Items -->
+    <menuitem id="menu_estate_property_type"
+        name="Property Types"
+        parent="menu_estate_settings"
+        action="action_estate_property_type"
+        sequence="30"/>
+
+    <!-- Menu under Settings -->
+    <menuitem id="menu_estate_property_tag"
+        name="Property Tags"
+        parent="menu_estate_settings"
+        action="action_estate_property_tag"
+        sequence="40"/>
+
+    <!-- Menu under Advertisement -->
+    <menuitem id="menu_estate_offer"
+              name="Offers"
+              parent="estate.menu_estate_advertisement"
+              action="action_estate_property_offer"/>
+</odoo>
